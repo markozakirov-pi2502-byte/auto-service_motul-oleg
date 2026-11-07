@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Service | Запис на ремонт</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #111418;
+            color: white;
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: #1c2229;
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #343b44;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e5a832;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin: 17px 0 8px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #414954;
+            border-radius: 7px;
+            background: #111820;
+            color: white;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid #e5a832;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+            background: #e5a832;
+            color: #111;
+            border: none;
+            border-radius: 7px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ffc34d;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+            color: #62d995;
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            margin-top: 25px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AUTO SERVICE</h1>
+
+    <p class="subtitle">
+        Запишіться на ремонт автомобіля
+    </p>
+
+    <form id="bookingForm">
+
+        <label>Ваше ім'я та прізвище</label>
+        <input type="text" name="name"
+        placeholder="Наприклад, Іван Петренко" required>
+
+        <label>Номер телефону</label>
+        <input type="tel" name="phone"
+        placeholder="+380XXXXXXXXX"
+        pattern="^\+?[0-9\s()-]{9,20}$" required>
+
+        <label>Марка автомобіля</label>
+        <input type="text" name="brand"
+        placeholder="Наприклад, Volkswagen" required>
+
+        <label>Модель автомобіля</label>
+        <input type="text" name="model"
+        placeholder="Наприклад, Passat B6" required>
+
+        <label>Рік випуску</label>
+        <input type="number" name="year"
+        placeholder="Наприклад, 2008"
+        min="1950" max="2026" required>
+
+        <label>Яка послуга вас цікавить?</label>
+
+        <select name="service" required>
+            <option value="">Оберіть послугу</option>
+            <option>Ремонт ходової</option>
+            <option>Заміна ременя ГРМ</option>
+            <option>Заміна ланцюга ГРМ</option>
+            <option>Заміна мастила та фільтрів</option>
+            <option>Діагностика автомобіля</option>
+            <option>Інший ремонт</option>
+        </select>
+
+        <label>Опишіть проблему з автомобілем</label>
+
+        <textarea name="problem"
+        placeholder="Наприклад: під час їзди стукає передня підвіска..."
+        required></textarea>
+
+        <button type="submit">
+            Відправити заявку
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <div class="footer">
+        AUTO SERVICE © 2026
+    </div>
+
+</div>
+
+<script>
+
+    const form = document.getElementById("bookingForm");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const data = new FormData(form);
+
+        const name = data.get("name");
+
+        document.getElementById("message").textContent =
+            "Дякуємо, " + name +
+            "! Форму заповнено успішно.";
+
+        form.reset();
+    });
+
+</script>
+
+</body>
+</html>

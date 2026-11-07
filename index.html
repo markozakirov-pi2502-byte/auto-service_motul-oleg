@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Service | Запис на ремонт</title>
+
+    <title>Auto Service | Ремонт автомобілів</title>
 
     <style>
         * {
@@ -15,61 +16,78 @@
         }
 
         body {
-            background: #111418;
+            background: #111;
             color: white;
             min-height: 100vh;
-            padding: 30px 15px;
+            padding: 35px 15px;
+            position: relative;
+        }
+
+        /* Фонове фото */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.65),
+                    rgba(0, 0, 0, 0.78)
+                ),
+                url("workshop.png") center 45% / cover no-repeat;
+            z-index: -1;
         }
 
         .container {
-            max-width: 650px;
+            max-width: 680px;
             margin: auto;
-            background: #1c2229;
             padding: 35px;
-            border-radius: 15px;
-            border: 1px solid #343b44;
+            background: rgba(20, 24, 29, 0.93);
+            border: 1px solid #555;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         h1 {
             text-align: center;
             color: #e5a832;
+            font-size: 36px;
             margin-bottom: 10px;
         }
 
         .subtitle {
             text-align: center;
-            color: #aaa;
+            color: #ccc;
             margin-bottom: 30px;
         }
 
         label {
             display: block;
-            margin: 17px 0 8px;
+            margin: 18px 0 8px;
             font-weight: bold;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 13px;
-            border: 1px solid #414954;
+            padding: 14px;
+            border: 1px solid #515b66;
             border-radius: 7px;
             background: #111820;
             color: white;
-            font-size: 15px;
-        }
-
-        textarea {
-            min-height: 110px;
-            resize: vertical;
+            font-size: 16px;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: 2px solid #e5a832;
         }
 
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
         button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             margin-top: 25px;
             background: #e5a832;
             color: #111;
@@ -84,17 +102,36 @@
             background: #ffc34d;
         }
 
-        #message {
+        .info {
             text-align: center;
-            margin-top: 20px;
-            color: #62d995;
+            margin-top: 25px;
+            color: #aaa;
+            font-size: 13px;
         }
 
-        .footer {
-            text-align: center;
-            color: #777;
-            margin-top: 25px;
+        .consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 18px;
+            color: #ccc;
             font-size: 13px;
+            font-weight: normal;
+        }
+
+        .consent input {
+            width: auto;
+            margin-top: 2px;
+        }
+
+        @media(max-width: 500px) {
+            .container {
+                padding: 22px 17px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
@@ -106,32 +143,60 @@
     <h1>AUTO SERVICE</h1>
 
     <p class="subtitle">
-        Запишіться на ремонт автомобіля
+        Ремонт та обслуговування автомобілів
     </p>
 
-    <form id="bookingForm">
+    <form
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+    >
+
+        <input type="hidden" name="_subject"
+        value="Нова заявка з сайту Auto Service">
 
         <label>Ваше ім'я та прізвище</label>
-        <input type="text" name="name"
-        placeholder="Наприклад, Іван Петренко" required>
+        <input
+            type="text"
+            name="name"
+            placeholder="Іван Петренко"
+            autocomplete="name"
+            required
+        >
 
         <label>Номер телефону</label>
-        <input type="tel" name="phone"
-        placeholder="+380XXXXXXXXX"
-        pattern="^\+?[0-9\s()-]{9,20}$" required>
+        <input
+            type="tel"
+            name="phone"
+            placeholder="+380XXXXXXXXX"
+            autocomplete="tel"
+            required
+        >
 
         <label>Марка автомобіля</label>
-        <input type="text" name="brand"
-        placeholder="Наприклад, Volkswagen" required>
+        <input
+            type="text"
+            name="brand"
+            placeholder="Volkswagen"
+            required
+        >
 
         <label>Модель автомобіля</label>
-        <input type="text" name="model"
-        placeholder="Наприклад, Passat B6" required>
+        <input
+            type="text"
+            name="model"
+            placeholder="Passat B6"
+            required
+        >
 
         <label>Рік випуску</label>
-        <input type="number" name="year"
-        placeholder="Наприклад, 2008"
-        min="1950" max="2026" required>
+        <input
+            type="number"
+            name="year"
+            placeholder="2008"
+            min="1950"
+            max="2026"
+            required
+        >
 
         <label>Яка послуга вас цікавить?</label>
 
@@ -145,45 +210,34 @@
             <option>Інший ремонт</option>
         </select>
 
-        <label>Опишіть проблему з автомобілем</label>
+        <label>Опишіть проблему автомобіля</label>
 
-        <textarea name="problem"
-        placeholder="Наприклад: під час їзди стукає передня підвіска..."
-        required></textarea>
+        <textarea
+            name="problem"
+            placeholder="Наприклад: стукає передня підвіска..."
+            required
+        ></textarea>
+
+        <label class="consent">
+            <input type="checkbox" required>
+            <span>
+                Погоджуюся на обробку моїх контактних
+                даних для зв'язку щодо заявки.
+            </span>
+        </label>
 
         <button type="submit">
-            Відправити заявку
+            ВІДПРАВИТИ ЗАЯВКУ
         </button>
 
     </form>
 
-    <p id="message"></p>
-
-    <div class="footer">
-        AUTO SERVICE © 2026
-    </div>
+    <p class="info">
+        AUTO SERVICE © 2026<br>
+        Ми зв'яжемося з вами для уточнення запису.
+    </p>
 
 </div>
-
-<script>
-
-    const form = document.getElementById("bookingForm");
-
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const data = new FormData(form);
-
-        const name = data.get("name");
-
-        document.getElementById("message").textContent =
-            "Дякуємо, " + name +
-            "! Форму заповнено успішно.";
-
-        form.reset();
-    });
-
-</script>
 
 </body>
 </html>

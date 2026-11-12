@@ -1,13 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Auto Service | Ремонт автомобілів</title>
-
+    <meta name="description" content="AUTO SERVICE — ремонт та обслуговування автомобілів в Івано-Франківську. Три станції, послуги, ціни та запис онлайн.">
+    <title>AUTO SERVICE | Ремонт автомобілів в Івано-Франківську</title>
     <style>
+        :root {
+            --gold: #e5a832;
+            --gold-light: #ffc34d;
+            --dark: #111820;
+            --panel: rgba(20, 24, 29, .95);
+            --muted: #c6cbd1;
+            --line: rgba(255,255,255,.14);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -15,229 +22,515 @@
             font-family: Arial, sans-serif;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            background: #111;
-            color: white;
+            color: #fff;
+            background: #101419;
             min-height: 100vh;
-            padding: 35px 15px;
+            line-height: 1.55;
             position: relative;
         }
 
-        /* Фонове фото */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.65),
-                    rgba(0, 0, 0, 0.78)
-                ),
-                url("workshop.png") center 45% / cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,.76), rgba(0,0,0,.88)),
+                        url("workshop.png") center 45% / cover no-repeat;
             z-index: -1;
         }
 
+        a { color: inherit; }
+
         .container {
-            max-width: 680px;
-            margin: auto;
-            padding: 35px;
-            background: rgba(20, 24, 29, 0.93);
-            border: 1px solid #555;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
         }
 
-        h1 {
-            text-align: center;
-            color: #e5a832;
-            font-size: 36px;
-            margin-bottom: 10px;
+        header {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--line);
+            background: rgba(10,13,16,.72);
         }
 
-        .subtitle {
-            text-align: center;
-            color: #ccc;
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: block;
-            margin: 18px 0 8px;
-            font-weight: bold;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #515b66;
-            border-radius: 7px;
-            background: #111820;
-            color: white;
-            font-size: 16px;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: 2px solid #e5a832;
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        button {
-            width: 100%;
-            padding: 16px;
-            margin-top: 25px;
-            background: #e5a832;
-            color: #111;
-            border: none;
-            border-radius: 7px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #ffc34d;
-        }
-
-        .info {
-            text-align: center;
-            margin-top: 25px;
-            color: #aaa;
-            font-size: 13px;
-        }
-
-        .consent {
+        .nav {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-top: 18px;
-            color: #ccc;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            font-size: 22px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #eee;
+            font-size: 14px;
+        }
+
+        nav a:hover { color: var(--gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 76px 0 58px;
+        }
+
+        .hero h1 {
+            color: var(--gold);
+            font-size: clamp(34px, 6vw, 58px);
+            line-height: 1.1;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #e0e0e0;
+            font-size: 18px;
+            max-width: 680px;
+            margin: 0 auto 25px;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            border: 0;
+            border-radius: 7px;
+            background: var(--gold);
+            color: #151515;
+            font-weight: 700;
+            padding: 12px 18px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button:hover { background: var(--gold-light); }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+        }
+
+        section { padding: 34px 0; }
+
+        .section-panel {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            padding: 28px;
+            box-shadow: 0 10px 32px rgba(0,0,0,.25);
+        }
+
+        h2 {
+            color: var(--gold);
+            font-size: 27px;
+            margin-bottom: 18px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 19px;
+            margin-bottom: 9px;
+        }
+
+        .muted { color: var(--muted); }
+
+        .stations {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 16px;
+        }
+
+        .station {
+            background: rgba(255,255,255,.045);
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            padding: 19px;
+        }
+
+        .station p {
+            color: var(--muted);
+            margin: 7px 0;
+        }
+
+        .station a.phone {
+            display: inline-block;
+            color: var(--gold-light);
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 7px 0 12px;
+        }
+
+        .hours {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+            font-size: 14px;
+        }
+
+        .hours div {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 3px 0;
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 16px;
+        }
+
+        .map-card {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            background: rgba(255,255,255,.04);
+        }
+
+        .map-card iframe {
+            display: block;
+            width: 100%;
+            height: 220px;
+            border: 0;
+        }
+
+        .map-card .map-caption { padding: 13px 15px; }
+
+        .map-caption p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .price-wrap { overflow-x: auto; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 420px;
+        }
+
+        th, td {
+            padding: 11px 12px;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+        }
+
+        th {
+            color: var(--gold-light);
+            background: rgba(229,168,50,.08);
+        }
+
+        td:last-child, th:last-child {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 16px;
+        }
+
+        .booking-card {
+            background: rgba(255,255,255,.045);
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .booking-card .button { margin-top: auto; }
+
+        .note {
             font-size: 13px;
-            font-weight: normal;
+            color: #b9c0c8;
+            margin-top: 12px;
         }
 
-        .consent input {
-            width: auto;
-            margin-top: 2px;
+        footer {
+            margin-top: 35px;
+            padding: 25px 0;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            color: #aeb5bd;
+            font-size: 13px;
         }
 
-        @media(max-width: 500px) {
-            .container {
-                padding: 22px 17px;
+        @media (max-width:800px) {
+            .stations, .map-grid, .booking-grid {
+                grid-template-columns: 1fr;
             }
 
-            h1 {
-                font-size: 28px;
-            }
+            .hero { padding: 55px 0 40px; }
+            .section-panel { padding: 20px; }
+        }
+
+        @media (max-width:520px) {
+            nav { gap: 11px; }
+            nav a { font-size: 13px; }
+            .hours div { font-size: 13px; }
         }
     </style>
 </head>
 
 <body>
 
+<header>
+    <div class="container nav">
+        <a class="logo" href="#">AUTO SERVICE</a>
+
+        <nav aria-label="Головна навігація">
+            <a href="#stations">Станції</a>
+            <a href="#services">Послуги та ціни</a>
+            <a href="#booking">Запис онлайн</a>
+        </nav>
+    </div>
+</header>
+
+<main>
 <div class="container">
 
-    <h1>AUTO SERVICE</h1>
+    <section class="hero">
+        <h1>AUTO SERVICE</h1>
+        <p>
+            Ремонт та обслуговування автомобілів в Івано-Франківську.
+            Оберіть зручну станцію, перегляньте послуги та запишіться онлайн.
+        </p>
+        <a class="button" href="#stations">Знайти нашу станцію</a>
+    </section>
 
-    <p class="subtitle">
-        Ремонт та обслуговування автомобілів
-    </p>
+    <!-- СТАНЦІЇ ТА КОНТАКТИ -->
+    <section id="stations">
+        <div class="section-panel">
+            <h2>Наші станції та контакти</h2>
 
-    <form
-        action="https://formspree.io/f/xrppvavy"
-        method="POST"
-    >
+            <div class="stations">
 
-        <input type="hidden" name="_subject"
-        value="Нова заявка з сайту Auto Service">
+                <article class="station">
+                    <h3>Станція №1</h3>
+                    <p>вул. Кропивницького, 1А, Івано-Франківськ</p>
+                    <a class="phone" href="tel:+380951474727">095 147 47 27</a>
 
-        <label>Ваше ім'я та прізвище</label>
-        <input
-            type="text"
-            name="name"
-            placeholder="Іван Петренко"
-            autocomplete="name"
-            required
-        >
+                    <div class="hours">
+                        <strong>Графік роботи</strong>
+                        <div><span>Пн–Пт</span><span>08:30–18:00</span></div>
+                        <div><span>Субота</span><span>08:30–15:00</span></div>
+                        <div><span>Неділя</span><span>Зачинено</span></div>
+                    </div>
+                </article>
 
-        <label>Номер телефону</label>
-        <input
-            type="tel"
-            name="phone"
-            placeholder="+380XXXXXXXXX"
-            autocomplete="tel"
-            required
-        >
+                <article class="station">
+                    <h3>Станція №2</h3>
+                    <p>вул. Надрічна, 48, Івано-Франківськ</p>
+                    <a class="phone" href="tel:+380994087373">099 408 73 73</a>
 
-        <label>Марка автомобіля</label>
-        <input
-            type="text"
-            name="brand"
-            placeholder="Volkswagen"
-            required
-        >
+                    <div class="hours">
+                        <strong>Графік роботи</strong>
+                        <div><span>Пн–Пт</span><span>08:30–18:00</span></div>
+                        <div><span>Субота</span><span>08:30–15:00</span></div>
+                        <div><span>Неділя</span><span>Зачинено</span></div>
+                    </div>
+                </article>
 
-        <label>Модель автомобіля</label>
-        <input
-            type="text"
-            name="model"
-            placeholder="Passat B6"
-            required
-        >
+                <article class="station">
+                    <h3>Станція №3</h3>
+                    <p>вул. Галицька, 203/2, Івано-Франківськ</p>
+                    <a class="phone" href="tel:+380991587373">099 158 73 73</a>
 
-        <label>Рік випуску</label>
-        <input
-            type="number"
-            name="year"
-            placeholder="2008"
-            min="1950"
-            max="2026"
-            required
-        >
+                    <div class="hours">
+                        <strong>Графік роботи</strong>
+                        <div><span>Пн–Пт</span><span>08:30–18:00</span></div>
+                        <div><span>Субота</span><span>08:30–15:00</span></div>
+                        <div><span>Неділя</span><span>Зачинено</span></div>
+                    </div>
+                </article>
 
-        <label>Яка послуга вас цікавить?</label>
+            </div>
+        </div>
+    </section>
 
-        <select name="service" required>
-            <option value="">Оберіть послугу</option>
-            <option>Ремонт ходової</option>
-            <option>Заміна ременя ГРМ</option>
-            <option>Заміна ланцюга ГРМ</option>
-            <option>Заміна мастила та фільтрів</option>
-            <option>Діагностика автомобіля</option>
-            <option>Інший ремонт</option>
-        </select>
+    <!-- КАРТА -->
+    <section id="map">
+        <div class="section-panel">
+            <h2>Як нас знайти</h2>
+            <p class="muted" style="margin-bottom:16px">
+                Оберіть потрібну станцію, щоб переглянути її розташування на карті.
+            </p>
 
-        <label>Опишіть проблему автомобіля</label>
+            <div class="map-grid">
 
-        <textarea
-            name="problem"
-            placeholder="Наприклад: стукає передня підвіска..."
-            required
-        ></textarea>
+                <div class="map-card">
+                    <iframe
+                        title="Карта — станція на вулиці Кропивницького, 1А"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://maps.google.com/maps?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9A%D1%80%D0%BE%D0%BF%D0%B8%D0%B2%D0%BD%D0%B8%D1%86%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE%2C%201%D0%90%2C%20%D0%86%D0%B2%D0%B0%D0%BD%D0%BE-%D0%A4%D1%80%D0%B0%D0%BD%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA&output=embed">
+                    </iframe>
+                    <div class="map-caption">
+                        <strong>Станція №1</strong>
+                        <p>Кропивницького, 1А</p>
+                        <a class="button secondary" target="_blank" rel="noopener"
+                           href="https://www.google.com/maps/search/?api=1&query=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9A%D1%80%D0%BE%D0%BF%D0%B8%D0%B2%D0%BD%D0%B8%D1%86%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE%2C%201%D0%90%2C%20%D0%86%D0%B2%D0%B0%D0%BD%D0%BE-%D0%A4%D1%80%D0%B0%D0%BD%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA">
+                            Відкрити маршрут
+                        </a>
+                    </div>
+                </div>
 
-        <label class="consent">
-            <input type="checkbox" required>
-            <span>
-                Погоджуюся на обробку моїх контактних
-                даних для зв'язку щодо заявки.
-            </span>
-        </label>
+                <div class="map-card">
+                    <iframe
+                        title="Карта — станція на вулиці Надрічній, 48"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://maps.google.com/maps?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9D%D0%B0%D0%B4%D1%80%D1%96%D1%87%D0%BD%D0%B0%2C%2048%2C%20%D0%86%D0%B2%D0%B0%D0%BD%D0%BE-%D0%A4%D1%80%D0%B0%D0%BD%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA&output=embed">
+                    </iframe>
+                    <div class="map-caption">
+                        <strong>Станція №2</strong>
+                        <p>Надрічна, 48</p>
+                        <a class="button secondary" target="_blank" rel="noopener"
+                           href="https://www.google.com/maps/search/?api=1&query=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9D%D0%B0%D0%B4%D1%80%D1%96%D1%87%D0%BD%D0%B0%2C%2048%2C%20%D0%86%D0%B2%D0%B0%D0%BD%D0%BE-%D0%A4%D1%80%D0%B0%D0%BD%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA">
+                            Відкрити маршрут
+                        </a>
+                    </div>
+                </div>
 
-        <button type="submit">
-            ВІДПРАВИТИ ЗАЯВКУ
-        </button>
+                <div class="map-card">
+                    <iframe
+                        title="Карта — станція на вулиці Галицькій, 203/2"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://maps.google.com/maps?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%93%D0%B0%D0%BB%D0%B8%D1%86%D1%8C%D0%BA%D0%B0%2C%20203%2F2%2C%20%D0%86%D0%B2%D0%B0%D0%BD%D0%BE-%D0%A4%D1%80%D0%B0%D0%BD%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA&output=embed">
+                    </iframe>
+                    <div class="map-caption">
+                        <strong>Станція №3</strong>
+                        <p>Галицька, 203/2</p>
+                        <a class="button secondary" target="_blank" rel="noopener"
+                           href="https://www.google.com/maps/search/?api=1&query=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%93%D0%B0%D0%BB%D0%B8%D1%86%D1%8C%D0%BA%D0%B0%2C%20203%2F2%2C%20%D0%86%D0%B2%D0%B0%D0%BD%D0%BE-%D0%A4%D1%80%D0%B0%D0%BD%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA">
+                            Відкрити маршрут
+                        </a>
+                    </div>
+                </div>
 
-    </form>
+            </div>
+        </div>
+    </section>
 
-    <p class="info">
-        AUTO SERVICE © 2026<br>
-        Ми зв'яжемося з вами для уточнення запису.
-    </p>
+    <!-- ПОСЛУГИ ТА ЦІНИ -->
+    <section id="services">
+        <div class="section-panel">
+            <h2>Послуги та ціни</h2>
+            <p class="muted" style="margin-bottom:16px">
+                Спільний прайс для всіх трьох станцій. Вартість вказана від зазначеної суми.
+            </p>
+
+            <div class="price-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Послуга</th>
+                            <th>Ціна</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Заміна гальмівних колодок</td><td>від 300 грн</td></tr>
+                        <tr><td>Заміна гальмівних дисків</td><td>від 300 грн</td></tr>
+                        <tr><td>Заміна барабанних колодок</td><td>від 400 грн</td></tr>
+                        <tr><td>Заміна гальмівних барабанів</td><td>від 400 грн</td></tr>
+                        <tr><td>Заміна гальмівної рідини</td><td>від 200 грн</td></tr>
+                        <tr><td>Заміна датчика ABS</td><td>від 350 грн</td></tr>
+                        <tr><td>Заміна моторної оливи та масляного фільтра</td><td>від 300 грн</td></tr>
+                        <tr><td>Заміна клинового ременя</td><td>від 350 грн</td></tr>
+                        <tr><td>Заміна рідини в автоматичній коробці передач</td><td>від 1 200 грн</td></tr>
+                        <tr><td>Заміна мастила в механічній коробці передач</td><td>від 400 грн</td></tr>
+                        <tr><td>Заміна охолоджувальної рідини</td><td>від 400 грн</td></tr>
+                        <tr><td>Заміна повітряного фільтра</td><td>від 100 грн</td></tr>
+                        <tr><td>Заміна стабілізатора</td><td>від 250 грн</td></tr>
+                        <tr><td>Заміна гумової втулки стабілізатора</td><td>від 200 грн</td></tr>
+                        <tr><td>Заміна важеля</td><td>від 300 грн</td></tr>
+                        <tr><td>Заміна кульової опори</td><td>від 350 грн</td></tr>
+                        <tr><td>Заміна амортизатора</td><td>від 300 грн</td></tr>
+                        <tr><td>Заміна пружини підвіски</td><td>від 200 грн</td></tr>
+                        <tr><td>Заміна маточини колеса</td><td>від 450 грн</td></tr>
+                        <tr><td>Заміна колісного підшипника</td><td>від 400 грн</td></tr>
+                        <tr><td>Заміна фільтра салону</td><td>від 100 грн</td></tr>
+                        <tr><td>Перевірка підвіски</td><td>від 250 грн</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="note">
+                Остаточну вартість робіт уточнюйте у вибраній станції.
+                Вартість запчастин, якщо вони потрібні, узгоджується окремо.
+            </p>
+        </div>
+    </section>
+
+    <!-- ЗАПИС НА ОБСЛУГОВУВАННЯ -->
+    <section id="booking">
+        <div class="section-panel">
+            <h2>Запис на обслуговування</h2>
+            <p class="muted" style="margin-bottom:17px">
+                Оберіть станцію, до якої хочете звернутися.
+                Анкети для запису будуть підключені окремо для кожної станції.
+            </p>
+
+            <div class="booking-grid">
+
+                <article class="booking-card">
+                    <h3>Станція №1</h3>
+                    <p class="muted">Кропивницького, 1А</p>
+                    <p><a class="phone" href="tel:+380951474727">095 147 47 27</a></p>
+                    <button class="button" type="button" disabled>Анкета готується</button>
+                </article>
+
+                <article class="booking-card">
+                    <h3>Станція №2</h3>
+                    <p class="muted">Надрічна, 48</p>
+                    <p><a class="phone" href="tel:+380994087373">099 408 73 73</a></p>
+                    <button class="button" type="button" disabled>Анкета готується</button>
+                </article>
+
+                <article class="booking-card">
+                    <h3>Станція №3</h3>
+                    <p class="muted">Галицька, 203/2</p>
+                    <p><a class="phone" href="tel:+380991587373">099 158 73 73</a></p>
+                    <button class="button" type="button" disabled>Анкета готується</button>
+                </article>
+
+            </div>
+
+            <p class="note">
+                Кнопки запису поки неактивні. Після створення трьох анкет
+                ми підключимо до кожної відповідне посилання.
+            </p>
+        </div>
+    </section>
 
 </div>
+</main>
+
+<footer>
+    <div class="container">
+        AUTO SERVICE © 2026 · Івано-Франківськ
+    </div>
+</footer>
 
 </body>
 </html>

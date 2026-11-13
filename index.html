@@ -257,7 +257,38 @@
             gap: 12px;
         }
 
-        .booking-card .button { margin-top: auto; }
+        .booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.booking-form label {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: #202830;
+    color: white;
+    font-size: 14px;
+}
+
+.booking-form textarea {
+    min-height: 75px;
+    resize: vertical;
+}
+
+.booking-form .button {
+    width: 100%;
+    margin-top: 5px;
+}
 
         .note {
             font-size: 13px;
@@ -483,44 +514,132 @@
     </section>
 
     <!-- ЗАПИС НА ОБСЛУГОВУВАННЯ -->
-    <section id="booking">
-        <div class="section-panel">
-            <h2>Запис на обслуговування</h2>
-            <p class="muted" style="margin-bottom:17px">
-                Оберіть станцію, до якої хочете звернутися.
-                Анкети для запису будуть підключені окремо для кожної станції.
-            </p>
+    
+<!-- ЗАПИС НА ОБСЛУГОВУВАННЯ -->
+<section id="booking">
+    <div class="section-panel">
+        <h2>Запис на обслуговування</h2>
+        <p class="muted" style="margin-bottom:17px">
+            Заповніть анкету потрібної станції. Після відправлення заявка надійде саме до неї.
+        </p>
 
-            <div class="booking-grid">
+        <div class="booking-grid">
 
-                <article class="booking-card">
-                    <h3>Станція №1</h3>
-                    <p class="muted">Кропивницького, 1А</p>
-                    <p><a class="phone" href="tel:+380951474727">095 147 47 27</a></p>
-                    <button class="button" type="button" disabled>Анкета готується</button>
-                </article>
+            <!-- СТАНЦІЯ №1 -->
+            <article class="booking-card">
+                <h3>Станція №1</h3>
+                <p class="muted">Кропивницького, 1А</p>
 
-                <article class="booking-card">
-                    <h3>Станція №2</h3>
-                    <p class="muted">Надрічна, 48</p>
-                    <p><a class="phone" href="tel:+380994087373">099 408 73 73</a></p>
-                    <button class="button" type="button" disabled>Анкета готується</button>
-                </article>
+                <form class="booking-form" action="https://formspree.io/f/xgakvlwr" method="POST">
+                    <input type="hidden" name="_subject" value="Заявка — Станція №1">
 
-                <article class="booking-card">
-                    <h3>Станція №3</h3>
-                    <p class="muted">Галицька, 203/2</p>
-                    <p><a class="phone" href="tel:+380991587373">099 158 73 73</a></p>
-                    <button class="button" type="button" disabled>Анкета готується</button>
-                </article>
+                    <label>Ваше ім'я</label>
+                    <input type="text" name="Ім'я" placeholder="Введіть ім'я" required>
 
-            </div>
+                    <label>Номер телефону</label>
+                    <input type="tel" name="Телефон" placeholder="Ваш номер телефону" required>
 
-            <p class="note">
-                Кнопки запису поки неактивні. Після створення трьох анкет
-                ми підключимо до кожної відповідне посилання.
-            </p>
+                    <label>Марка автомобіля</label>
+                    <input type="text" name="Марка автомобіля" placeholder="Наприклад, BMW" required>
+
+                    <label>Модель автомобіля</label>
+                    <input type="text" name="Модель автомобіля" placeholder="Наприклад, X5" required>
+
+                    <label>Оберіть послугу</label>
+                    <select name="Послуга" required>
+                        <option value="">Оберіть послугу</option>
+                        <option>Заміна оливи</option>
+                        <option>Ремонт гальмівної системи</option>
+                        <option>Ремонт підвіски</option>
+                        <option>Діагностика автомобіля</option>
+                        <option>Інше</option>
+                    </select>
+
+                    <label>Коментар</label>
+                    <textarea name="Коментар" placeholder="Опишіть проблему або побажання"></textarea>
+
+                    <button class="button" type="submit">Відправити заявку</button>
+                </form>
+            </article>
+
+            <!-- СТАНЦІЯ №2 -->
+            <article class="booking-card">
+                <h3>Станція №2</h3>
+                <p class="muted">Надрічна, 48</p>
+
+                <form class="booking-form" action="https://formspree.io/f/xaeonbre" method="POST">
+                    <input type="hidden" name="_subject" value="Заявка — Станція №2">
+
+                    <label>Ваше ім'я</label>
+                    <input type="text" name="Ім'я" placeholder="Введіть ім'я" required>
+
+                    <label>Номер телефону</label>
+                    <input type="tel" name="Телефон" placeholder="Ваш номер телефону" required>
+
+                    <label>Марка автомобіля</label>
+                    <input type="text" name="Марка автомобіля" placeholder="Наприклад, BMW" required>
+
+                    <label>Модель автомобіля</label>
+                    <input type="text" name="Модель автомобіля" placeholder="Наприклад, X5" required>
+
+                    <label>Оберіть послугу</label>
+                    <select name="Послуга" required>
+                        <option value="">Оберіть послугу</option>
+                        <option>Заміна оливи</option>
+                        <option>Ремонт гальмівної системи</option>
+                        <option>Ремонт підвіски</option>
+                        <option>Діагностика автомобіля</option>
+                        <option>Інше</option>
+                    </select>
+
+                    <label>Коментар</label>
+                    <textarea name="Коментар" placeholder="Опишіть проблему або побажання"></textarea>
+
+                    <button class="button" type="submit">Відправити заявку</button>
+                </form>
+            </article>
+
+            <!-- СТАНЦІЯ №3 -->
+            <article class="booking-card">
+                <h3>Станція №3</h3>
+                <p class="muted">Галицька, 203/2</p>
+
+                <form class="booking-form" action="https://formspree.io/f/xyewzdgp" method="POST">
+                    <input type="hidden" name="_subject" value="Заявка — Станція №3">
+
+                    <label>Ваше ім'я</label>
+                    <input type="text" name="Ім'я" placeholder="Введіть ім'я" required>
+
+                    <label>Номер телефону</label>
+                    <input type="tel" name="Телефон" placeholder="Ваш номер телефону" required>
+
+                    <label>Марка автомобіля</label>
+                    <input type="text" name="Марка автомобіля" placeholder="Наприклад, BMW" required>
+
+                    <label>Модель автомобіля</label>
+                    <input type="text" name="Модель автомобіля" placeholder="Наприклад, X5" required>
+
+                    <label>Оберіть послугу</label>
+                    <select name="Послуга" required>
+                        <option value="">Оберіть послугу</option>
+                        <option>Заміна оливи</option>
+                        <option>Ремонт гальмівної системи</option>
+                        <option>Ремонт підвіски</option>
+                        <option>Діагностика автомобіля</option>
+                        <option>Інше</option>
+                    </select>
+
+                    <label>Коментар</label>
+                    <textarea name="Коментар" placeholder="Опишіть проблему або побажання"></textarea>
+
+                    <button class="button" type="submit">Відправити заявку</button>
+                </form>
+            </article>
+
         </div>
+    </div>
+</section>
+
     </section>
 
 </div>
